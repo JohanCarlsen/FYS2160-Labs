@@ -2,6 +2,7 @@
 import lammps_logfile
 import matplotlib.pyplot as plt
 
+
 log = lammps_logfile.File("log.lammps")
 keyWords = log.get_keywords()
 
@@ -20,7 +21,3 @@ avgE_pair = lammps_logfile.running_mean(E_pair, 100)
 avgPress = lammps_logfile.running_mean(press, 100)
 avgTemp = lammps_logfile.running_mean(temp, 100)
 avgTotEng = lammps_logfile.running_mean(totEng, 100)
-
-plt.plot(step, temp)
-plt.plot(step, avgTemp)
-plt.show()
