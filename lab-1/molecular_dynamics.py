@@ -21,3 +21,13 @@ avgE_pair = lammps_logfile.running_mean(E_pair, 100)
 avgPress = lammps_logfile.running_mean(press, 100)
 avgTemp = lammps_logfile.running_mean(temp, 100)
 avgTotEng = lammps_logfile.running_mean(totEng, 100)
+
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(11, 7), sharex=True)
+ax1.plot(step, totEng)
+ax1.set_yscale('log')
+
+ax2.plot(step, avgTotEng)
+ax2.set_yscale('log')
+ax2.set_xlabel('Time [$t$]')
+
+plt.show()
