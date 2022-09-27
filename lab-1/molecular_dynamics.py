@@ -3,7 +3,7 @@ import lammps_logfile
 import matplotlib.pyplot as plt
 
 
-log = lammps_logfile.File("log.lammps")
+log = lammps_logfile.File("log.lammps_ORIGINAL")
 keyWords = log.get_keywords()
 
 # print(keyWords)

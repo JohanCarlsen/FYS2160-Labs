@@ -3,7 +3,7 @@ from lammps_logfile import File, running_mean
 from ovito.io import import_file
 import matplotlib.pyplot as plt
 
-pipeline = import_file('dump.lammpstrj')
+pipeline = import_file('dump.lammpstrj_ORIGINAL')
 
 _t = []
 _N_atoms = []
