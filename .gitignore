@@ -1,3 +1,4 @@
 # Files to be skipped
 
 .DS_Store
+.pdf

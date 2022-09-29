@@ -2,6 +2,7 @@
 import lammps_logfile
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.stats import linregress as linreg
 
 
 log = lammps_logfile.File("log.lammps_ORIGINAL")
@@ -17,6 +18,8 @@ _step = log.get('Step')
 _T = log.get('Temp')
 _E_tot = log.get('TotEng')
 
+# From looking at the file "log.lammps_ORIGINAL", the correct values start at
+# index 6
 E_mol = _E_mol[6:]
 E_pair = _E_pair[6:]
 P = _P[6:]
@@ -24,12 +27,14 @@ t = _step[6:] - 101000
 T = _T[6:]
 E_tot = _E_tot[6:]
 
+# Taking the average w/ 100 elements, not sure we need it.
 avgE_mol = lammps_logfile.running_mean(E_mol, 100)
 avgE_pair = lammps_logfile.running_mean(E_pair, 100)
 avgPress = lammps_logfile.running_mean(P, 100)
 avgTemp = lammps_logfile.running_mean(T, 100)
 avgTotEng = lammps_logfile.running_mean(E_tot, 100)
 
+# Make a subplot of each value from the .log file
 fig = plt.figure(figsize=(11, 6.5))
 ax1 = plt.subplot2grid((2, 6), (0, 0), colspan=2)
 ax2 = plt.subplot2grid((2, 6), (0, 2), colspan=2)
@@ -63,4 +68,20 @@ ax5.set_xlabel('$t$')
 ax5.set_ylabel('$E$')
 
 plt.tight_layout()
+
+# Now, let's solve the first task. We want to find the heat capacity C_V at
+# constant volume. This is done w/ dU/dT
+data = linreg(T, E_tot)
+
+plt.figure()
+plt.scatter(T, E_tot, color='k', s=2, label='Data points')
+plt.plot(T, data.slope * T + data.intercept, color='r', label='Linear regression')
+plt.text(1.25, -0.3, f'$C_V=${data.slope:.2f} $\pm$ {data.stderr:.2e}')
+
+plt.xlabel('$T$')
+plt.ylabel('$E$')
+
+plt.legend()
+plt.tight_layout()
+
 plt.show()
