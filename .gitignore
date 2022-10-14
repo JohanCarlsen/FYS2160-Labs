@@ -1,4 +1,7 @@
 # Files to be skipped
 
-.DS_Store
-.pdf
+*.DS_Store
+*.pdf
+*.in
+dump.*
+*.lamps

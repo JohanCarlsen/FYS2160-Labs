@@ -4,7 +4,7 @@ variable T equal 1
 # Number of molecules:
 variable N equal 500
 # Density:
-variable rho equal 0.01
+variable rho equal 0.001
 # Length of sides of cubic box
 variable L equal (${N}/${rho})^(1/3)
 # How much heat to add per timestep
