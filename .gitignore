@@ -1,7 +1,16 @@
 # Files to be skipped
 
+# Desktop thingy
 *.DS_Store
+
+# Figures/plots
 *.pdf
+
+# Lammpsfiles
 *.in
 dump.*
+log.*
+*.lammpstrj
 *.lamps
+*.SPCE
+restart.*
